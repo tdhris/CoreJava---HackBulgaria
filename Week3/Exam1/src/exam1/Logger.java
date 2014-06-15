@@ -2,8 +2,8 @@ package exam1;
 
 
 public class Logger {
-    private int level;
-    private static final int DEFAULT_LEVEL = 3;
+    protected int level;
+    protected static final int DEFAULT_LEVEL = 3;
     
     public Logger() {
         this.level = DEFAULT_LEVEL;
