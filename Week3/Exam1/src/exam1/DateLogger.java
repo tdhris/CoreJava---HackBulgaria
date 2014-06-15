@@ -3,6 +3,14 @@ package exam1;
 import java.util.Calendar;
 
 public class DateLogger extends Logger {
+    public DateLogger() {
+        super();
+    }
+
+    public DateLogger(int level) {
+        super(level);
+    }
+    
     protected void print(String message) {
         String now = getDate();
         System.out.println(String.format("| %s | %s", now, message));
