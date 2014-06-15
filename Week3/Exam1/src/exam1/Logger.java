@@ -21,18 +21,22 @@ public class Logger {
         this.level = newLevel;
     }
     
-    public void log(int level, String message) {
-        if (isImportant(level)) {
+    public void log(int level, String message) throws InvalidImportanceException {
+        if (level < 0) {
+            throw new InvalidImportanceException("Negative Importance Level: " + level);
+        }
+
+        else if (isImportant(level)) {
             print(message);
         }
     }
     
-    public void log(String message) {
+    public void log(String message) throws InvalidImportanceException {
         this.log(DEFAULT_LEVEL, message);
     }
 
     protected boolean isImportant(int messageLevel) {
-        return messageLevel > 0 && messageLevel <= this.level;
+        return messageLevel <= this.level;
     }
     
     protected void print(String message) {
