@@ -2,26 +2,6 @@ package exam1;
 
 
 public class Logger {
-    
-    public static void main(String[] args) throws InvalidImportanceException {
-
-        // Logger logger = new Logger();
-        Logger logger = new DateLogger();
-
-        logger.log(2, "Somewhat important message");
-        logger.log(3, "Less important message");
-        logger.log(5, "Not important");
-        logger.log("Meh");
-
-        logger.setLevel(2);
-        logger.log("My message");
-
-        logger.setLevel(3);
-        logger.log("My message");
-
-        logger.log("");
-    }
-
     protected int level;
     protected static final int DEFAULT_LEVEL = 3;
     
@@ -29,29 +9,29 @@ public class Logger {
         this.level = DEFAULT_LEVEL;
     }
     
-    public Logger(int level) {
-        this.level = level;
+    public Logger(int level) throws InvalidLevelException {
+        if (validLevel(level)) {
+            this.level = level;
+        }
     }
     
     public int getLevel() {
         return this.level;
     }
     
-    public void setLevel(int newLevel) {
-        this.level = newLevel;
+    public void setLevel(int newLevel) throws InvalidLevelException {
+        if (validLevel(newLevel)) {
+            this.level = newLevel;
+        }
     }
     
-    public void log(int level, String message) throws InvalidImportanceException {
-        if (level < 0) {
-            throw new InvalidImportanceException("Negative Importance Level: " + level);
-        }
-
-        else if (isImportant(level)) {
+    public void log(int level, String message) throws InvalidLevelException {
+        if (validLevel(level) && isImportant(level)) {
             print(level, message);
         }
     }
     
-    public void log(String message) throws InvalidImportanceException {
+    public void log(String message) throws InvalidLevelException {
         this.log(DEFAULT_LEVEL, message);
     }
 
@@ -61,6 +41,13 @@ public class Logger {
     
     protected void print(int levelMessage, String message) {
         System.out.println(String.format("%d => %s", levelMessage, message));
+    }
+    
+    protected boolean validLevel(int level) throws InvalidLevelException {
+        if (level < 0) {
+            throw new InvalidLevelException("Negative Level: " + level);
+        }
+        return true;
     }
     
 }

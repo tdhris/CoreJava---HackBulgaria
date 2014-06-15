@@ -7,7 +7,7 @@ public class DateLogger extends Logger {
         super();
     }
 
-    public DateLogger(int level) {
+    public DateLogger(int level) throws InvalidLevelException {
         super(level);
     }
     
