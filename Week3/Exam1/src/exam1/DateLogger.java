@@ -11,9 +11,9 @@ public class DateLogger extends Logger {
         super(level);
     }
     
-    protected void print(String message) {
+    protected void print(int messageLevel, String message) {
         String now = getDate();
-        System.out.println(String.format("| %s | %s", now, message));
+        System.out.println(String.format("| %s | %d => %s", now, messageLevel, message));
     }
 
     private String getDate() {
