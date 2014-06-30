@@ -11,8 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TestFileUtils {
-    File myFile;
-    File propertiesFile;
+    private File myFile;
+    private File propertiesFile;
 
     @Before
     public void setUp() throws Exception {
@@ -64,6 +64,15 @@ public class TestFileUtils {
         assertEquals("b1", parted.get("a1"));
         assertEquals("=b2 #comment", parted.get("a2"));
         assertEquals("b3", parted.get("a3"));
+    }
+    
+    @Test
+    public void testCompressFile() throws IOException {
+        FileUtils.writeTo(myFile, "Buffalo buffalo buffalo rides a buffalo buffalo buffalo.");
+        FileUtils.compress(myFile.toPath());
+        String content = FileUtils.readFrom(myFile);
+        String expected = "~0 ~0 ~0 ~1 ~2 ~0 ~0 ~0.";
+        assertEquals(expected, content);
     }
     
     @After
