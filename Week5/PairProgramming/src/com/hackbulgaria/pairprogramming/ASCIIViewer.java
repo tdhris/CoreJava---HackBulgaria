@@ -81,7 +81,7 @@ public class ASCIIViewer {
     private LinkedHashMap<Integer, Character> getASCIIIntensityTable() {
         LinkedHashMap<Integer, Character> intensityTable = new LinkedHashMap<>();
         String asciiSymbols = "@%#*+=-:. ";
-        int step = (255 / asciiSymbols.length()) + 2;
+        int step = (255 / asciiSymbols.length());
         int upperBound = step;
         for (int i = 0; i < asciiSymbols.length(); i++) {
             intensityTable.put(upperBound, asciiSymbols.charAt(i));
